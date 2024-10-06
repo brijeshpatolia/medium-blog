@@ -67,7 +67,10 @@ userRouter.post("/signup", async (c) => {
     });
 
     // Sign a JWT with the user's ID
-    const token = await sign({ userId: user.id }, c.env.JWT_SECRET);
+    const token = await sign(
+      { userId: user.id, name: user.name },
+      c.env.JWT_SECRET
+    );
 
     // Return the JWT as a response
     return c.json({ jwt: token });
@@ -108,7 +111,13 @@ userRouter.post("/signin", async (c) => {
     }
 
     // Sign a JWT with the user's ID
-    const token = await sign({ userId: user.id }, c.env.JWT_SECRET);
+    const token = await sign(
+      {
+        userId: user.id,
+        name: user.name, // Include the user's name in the JWT payload for future use
+      },
+      c.env.JWT_SECRET
+    );
 
     // Return the JWT as a response
     return c.json({ jwt: token });

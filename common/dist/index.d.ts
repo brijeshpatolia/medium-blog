@@ -2,7 +2,7 @@ import z from "zod";
 export declare const signupInput: z.ZodObject<{
     email: z.ZodString;
     password: z.ZodString;
-    name: z.ZodOptional<z.ZodString>;
+    name: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     email: string;
     password: string;
