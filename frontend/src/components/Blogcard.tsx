@@ -53,8 +53,8 @@ export const BlogCard = ({
   const formattedDate = formatDate(createdAt); // Format the date
 
   return (
-    <div className="flex items-center bg-white rounded-lg shadow-md overflow-hidden mb-4 w-3/5 mx-auto">
-      <div className="flex-1 p-6">
+    <div className="flex items-center bg-white rounded-lg shadow-md overflow-hidden mb-4 w-3/5 mx-auto h-72"> {/* Fixed height set here */}
+      <div className="flex-1 p-6 overflow-hidden"> {/* Ensure that the content is clipped */}
         <div className="flex items-center text-gray-500 mb-2">
           <div
             className={`w-8 h-8 rounded-full ${avatarColor} text-white flex items-center justify-center mr-2`}
@@ -68,9 +68,11 @@ export const BlogCard = ({
         <Link to={`/blog/${id}`} className="block">
           <h2 className="text-xl font-bold text-gray-900">{title}</h2>
         </Link>
-        <p className="mt-1 text-gray-600">{description}</p>
+        <p className="mt-1 text-gray-600 line-clamp-3"> {/* Added line-clamp for description */}
+          {description}
+        </p>
       </div>
-      <div className="w-48 h-auto">
+      <div className="w-48 h-full"> {/* Set height to full for image */}
         <img src={imageUrl} alt={title} className="object-cover h-full w-full" />
       </div>
     </div>

@@ -67,13 +67,14 @@ bookRouter.post("/", async (c) => {
     const post = await prisma.post.create({
       data: {
         title: validation.data.title,
-        content: validation.data.content,
+        content: validation.data.content, // Rich text content (HTML/Markdown)
         author: {
           connect: { id: userId },
         },
       },
     });
-    return c.json({ id: post.id });
+
+    return c.json({ message: "Post created successfully", id: post.id });
   } catch (error) {
     console.error("Error creating post:", error);
     c.status(500);
@@ -155,6 +156,7 @@ bookRouter.get("/bulk", async (c) => {
 });
 
 // GET /:id: Retrieve a post by ID
+// GET /:id: Retrieve a post by ID
 bookRouter.get("/:id", async (c) => {
   const id = c.req.param("id");
   if (!id) {
@@ -169,6 +171,14 @@ bookRouter.get("/:id", async (c) => {
   try {
     const post = await prisma.post.findUnique({
       where: { id },
+      include: {
+        author: { // Include author information
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
     });
 
     if (!post) {
@@ -183,5 +193,6 @@ bookRouter.get("/:id", async (c) => {
     return c.json({ error: "Internal Server Error" });
   }
 });
+
 
 export default bookRouter;

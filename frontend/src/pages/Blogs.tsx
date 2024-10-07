@@ -1,4 +1,4 @@
-import { Appbar } from "../components/appbar";
+import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/Blogcard";
 import { useBlogs } from "../hooks";
 import { useUser } from "../hooks/useUser";
@@ -15,7 +15,7 @@ export const Blogs = () => {
   console.log("Blogs:", blogs); // Debugging line
   console.log("User:", user); // Debugging line
 
-  // Handle case where user is not available (e.g., not logged in)
+  // Handle case where user is not available (e.g., not logged4444in)
   if (!user) {
     return <div>Please log in to see your blogs.</div>;
   }
