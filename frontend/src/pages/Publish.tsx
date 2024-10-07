@@ -15,16 +15,16 @@ export const Publish = () => {
 
     try {
       // Sanitize the content (if using HTML)
-      const sanitizedContent = DOMPurify.sanitize(content);
+      const plainTextContent = quill.getText(); 
 
       // Convert Markdown to HTML
-      const htmlContent = marked(sanitizedContent);
+    
 
       const response = await axios.post(
         "https://backend.pledith31.workers.dev/api/v1/blog",
         {
           title,
-          content: htmlContent, // Use htmlContent for HTML format
+          content: plainTextContent, // Use htmlContent for HTML format
         },
         {
           headers: {
